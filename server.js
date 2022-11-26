@@ -29,6 +29,14 @@ app.get("/quotes/random", function (request, response) {
 
 app.get("/quotes/search", function (request, response) {
   let searchQuery = request.query.term.toLowerCase();
+
+  console.log(searchQuery);
+
+  for (const obj of quotes) {
+    if (obj.quote.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase()))
+      console.log(obj.quote);
+  }
+
   response.send(searchQuery);
 });
 //...END OF YOUR CODE
