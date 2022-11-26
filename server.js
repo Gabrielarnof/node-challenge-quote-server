@@ -34,7 +34,7 @@ app.get("/quotes/search", function (request, response) {
 
   for (const obj of quotes) {
     if (obj.quote.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase()))
-      console.log(obj.quote);
+      result.push(obj);
   }
 
   response.send(searchQuery);
