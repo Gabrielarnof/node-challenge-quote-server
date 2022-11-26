@@ -22,6 +22,11 @@ app.get("/quotes", function (request, response) {
   response.send(quotes);
 });
 
+app.get("/quotes/random", function (request, response) {
+  const randomQuote = pickFromArray(quotes);
+  response.send(randomQuote);
+});
+
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
