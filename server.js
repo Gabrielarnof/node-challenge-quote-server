@@ -28,16 +28,17 @@ app.get("/quotes/random", function (request, response) {
 });
 
 app.get("/quotes/search", function (request, response) {
-  let searchQuery = request.query.term.toLowerCase();
-
-  console.log(searchQuery);
-
-  for (const obj of quotes) {
-    if (obj.quote.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase()))
-      result.push(obj);
+  const filter = request.query.term.toLowerCase();
+  if (!filter) {
+    response.status(500).send("Term param is missing");
   }
-
-  response.send(searchQuery);
+  const quoteFiltered = quotes.filter((quote) => {
+    const quoteString = quote.quote.toLowerCase();
+    const authorString = quote.author.toLowerCase();
+    console.log(quoteString);
+    return quoteString.includes(filter) || authorString.includes(filter);
+  });
+  response.send(quoteFiltered);
 });
 //...END OF YOUR CODE
 
